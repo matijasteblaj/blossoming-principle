@@ -1,1 +1,3 @@
-def hello := "world"
+import Mathlib.LinearAlgebra.AffineSpace.Basic
+
+open Affine
