@@ -4,6 +4,8 @@ import Mathlib.LinearAlgebra.Basis.Defs
 import Mathlib.Algebra.Field.Defs
 
 import Mathlib.Algebra.MvPolynomial.Basic
+import Mathlib.Algebra.MvPolynomial.Eval
+import Mathlib.Algebra.MvPolynomial.Degrees
 
 
 open Affine
@@ -36,6 +38,13 @@ end CoordinateSystem
 structure PolynomialMapInCoords where
   cs₁ : CoordinateSystem F V P
   cs₂ : CoordinateSystem F W R
+  --The actual map
   map : P → R
+  --The polynomials representing the map
   polys : cs₂.ι → MvPolynomial cs₁.ι F
-  --map_poly_equality: ∀(p : P)(i : cs₂.ι)
+  --The coordinates of the mapped point must be values of polys of the coordinates of the initial point
+  map_poly_eq: ∀(p : P)(i : cs₂.ι), (cs₂.coordinates (map p)) i = (polys i).eval (cs₁.coordinates p)
+  --Degree of polynomial map is the smallest bound for degrees of polys
+  degree : Nat
+  deg_max: ∀(i : cs₂.ι), degree ≥ (polys i).totalDegree
+  deg_exist: ∃(i : cs₂.ι), degree = (polys i).totalDegree
