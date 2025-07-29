@@ -19,7 +19,7 @@ structure CoordinateSystem (F V P: Type*) [Field F] [AddCommGroup V] [VectorSpac
   [AffineSpace V P] where
   ι : Type
   origin : P
-  basis  : Basis ι F V
+  basis  : Module.Basis ι F V
 
 variable {F : Type*} [Field F]
 variable {V : Type*} [AddCommGroup V] [VectorSpace F V]
@@ -53,16 +53,16 @@ def isPolyMapInCoords (map : P → R) (cs₁ : CoordinateSystem F V P)
  (cs₂ : CoordinateSystem F W R) : Prop :=
   Nonempty (PolynomialMapInCoords map cs₁ cs₂)
 
-theorem polyInOnePolyInAnother (map : P → R) (cs₁ : CoordinateSystem F V P)
+theorem poly_in_one_poly_in_another (map : P → R) (cs₁ : CoordinateSystem F V P)
  (cs₂ : CoordinateSystem F W R)(cs₃ : CoordinateSystem F V P)(cs₄ : CoordinateSystem F W R):
    (isPolyMapInCoords map cs₁ cs₂) → (isPolyMapInCoords map cs₃ cs₄) := by
    sorry
 
-theorem polyInOnePolyInAll (map : P → R) (cs₁ : CoordinateSystem F V P)
+theorem poly_in_one_poly_in_all (map : P → R) (cs₁ : CoordinateSystem F V P)
  (cs₂ : CoordinateSystem F W R):
   (isPolyMapInCoords map cs₁ cs₂) → ∀ (cs₃ : CoordinateSystem F V P)(cs₄ : CoordinateSystem F W R), (isPolyMapInCoords map cs₃ cs₄) := by
     intro h cs₃ cs₄
-    apply (polyInOnePolyInAnother map cs₁ cs₂)
+    apply (poly_in_one_poly_in_another map cs₁ cs₂)
     exact h
 
 /-Define the property of being a polynomial map (existence of two coordinate
