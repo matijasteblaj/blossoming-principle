@@ -11,8 +11,6 @@ import Mathlib.Algebra.MvPolynomial.Degrees
 open Affine
 notation "VectorSpace" => Module
 
-section PolynomialMaps
-
 /- Define a coordinate system of an affine space as a pair
  of a point (origin) and vector space basis. -/
 structure CoordinateSystem (F V P: Type*) [Field F] [AddCommGroup V] [VectorSpace F V]

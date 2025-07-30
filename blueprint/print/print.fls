@@ -183,6 +183,12 @@ INPUT .\content.tex
 INPUT .\content.tex
 INPUT .\content.tex
 INPUT content.tex
+INPUT C:\Users\steblaj.FMF\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam10.tfm
+INPUT C:\Users\steblaj.FMF\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam7.tfm
+INPUT C:\Users\steblaj.FMF\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam5.tfm
+INPUT C:\Users\steblaj.FMF\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
+INPUT C:\Users\steblaj.FMF\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
+INPUT C:\Users\steblaj.FMF\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm5.tfm
 INPUT C:\FMF2425\FORMATH\Project\blossoming-principle\blueprint\print\print.aux
 INPUT C:\FMF2425\FORMATH\Project\blossoming-principle\blueprint\print\print.out
 INPUT C:\FMF2425\FORMATH\Project\blossoming-principle\blueprint\print\print.out

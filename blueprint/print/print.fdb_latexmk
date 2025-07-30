@@ -1,12 +1,14 @@
 # Fdb version 4
-["pdflatex"] 1733482992.97424 "print.tex" "C:/FMF2425/FORMATH/Project/blossoming-principle/blueprint/print/print.pdf" "print" 1733482996.66267 0
-  "C:/FMF2425/FORMATH/Project/blossoming-principle/blueprint/print/print.aux" 1733482995 379 0b2007ff0c63cc9f2a7b593e785cd816 "pdflatex"
-  "C:/FMF2425/FORMATH/Project/blossoming-principle/blueprint/print/print.out" 1733482995 386 4d078ab2bd7df16a6744bbd6e73a99de "pdflatex"
+["pdflatex"] 1753866056.72736 "print.tex" "C:/FMF2425/FORMATH/Project/blossoming-principle/blueprint/print/print.pdf" "print" 1753866060.6073 0
+  "C:/FMF2425/FORMATH/Project/blossoming-principle/blueprint/print/print.aux" 1753866059 494 cd95ad554f9fb23f5f41b93903f37fcf "pdflatex"
+  "C:/FMF2425/FORMATH/Project/blossoming-principle/blueprint/print/print.out" 1753866059 386 4d078ab2bd7df16a6744bbd6e73a99de "pdflatex"
   "C:/Users/steblaj.FMF/AppData/Local/MiKTeX/miktex/data/le/xetex/xelatex.fmt" 1733416157 25350842 3183df2af7aeeeae4607fecde5ca062d ""
   "C:/Users/steblaj.FMF/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136768654 1528 7e12f4c0fcf5a072cebdcfbfc610f54c ""
   "C:/Users/steblaj.FMF/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1233951854 916 f87d7c45f9c908e672703b83b72241a3 ""
+  "C:/Users/steblaj.FMF/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/symbols/msam5.tfm" 1233951854 924 9904cf1d39e9767e7a3622f2a125a565 ""
   "C:/Users/steblaj.FMF/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/symbols/msam7.tfm" 1233951854 928 2dc8d444221b7a635bb58038579b861a ""
   "C:/Users/steblaj.FMF/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/symbols/msbm10.tfm" 1233951854 908 2921f8a10601f252058503cc6570e581 ""
+  "C:/Users/steblaj.FMF/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/symbols/msbm5.tfm" 1233951854 940 75ac932a52f80982a9f8ea75d03a34cf ""
   "C:/Users/steblaj.FMF/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/symbols/msbm7.tfm" 1233951854 940 228d6584342e91276bf566bcf9716b83 ""
   "C:/Users/steblaj.FMF/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmmi12.tfm" 1136765053 1524 4414a8315f39513458b80dfc63bff03a ""
   "C:/Users/steblaj.FMF/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmmi6.tfm" 1136765053 1512 f21f83efb36853c0b70002322c1ab3ad ""
@@ -79,7 +81,7 @@
   "C:/Users/steblaj.FMF/AppData/Local/Programs/MiKTeX/tex/latex/unicode-math/unicode-math-xetex.sty" 1691937353 131459 a23c98c9e5ecfc17568c7bc94fda1317 ""
   "C:/Users/steblaj.FMF/AppData/Local/Programs/MiKTeX/tex/latex/unicode-math/unicode-math.sty" 1691937353 1474 b42cfbe849cb22ed1c0632800327884f ""
   "C:/Users/steblaj.FMF/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
-  "content.tex" 1733482962 977 3b45c1e2d9d2c987fa21149d610f8fd6 ""
+  "content.tex" 1753865989 1278 cc14cc523f930af918a67c2b6b861ea9 ""
   "macros/common.tex" 1733413482 837 60fafcc3aa944a5e60030581a943ef6b ""
   "macros/print.tex" 1733413482 1129 87627b2ec24fef68edc71c13f43f7bab ""
   "print.tex" 1733479412 1159 0b571ebd7184b82abb8bba33992219dc ""
