@@ -7,64 +7,78 @@ import Mathlib.Algebra.MvPolynomial.Basic
 import Mathlib.Algebra.MvPolynomial.Eval
 import Mathlib.Algebra.MvPolynomial.Degrees
 
+import Mathlib.Data.Fintype.Defs
 
 open Affine
 notation "VectorSpace" => Module
 
-/- Define a coordinate system of an affine space as a pair
- of a point (origin) and vector space basis. -/
-structure CoordinateSystem (F V P: Type*) [Field F] [AddCommGroup V] [VectorSpace F V]
+section PolynomialMaps
+
+/-- A coordinate system on an affine space is a pair of a point (origin)
+and vector space basis. -/
+structure CoordinateSystem (ι F V P : Type) [Field F] [AddCommGroup V] [VectorSpace F V]
   [AffineSpace V P] where
-  ι : Type
   origin : P
   basis  : Module.Basis ι F V
 
-variable {F : Type*} [Field F]
-variable {V : Type*} [AddCommGroup V] [VectorSpace F V]
-variable {P : Type*} [AffineSpace V P]
-variable {W : Type*} [AddCommGroup W] [VectorSpace F W]
-variable {R : Type*} [AffineSpace W R]
+variable {F : Type} [Field F]
+variable {V : Type} [AddCommGroup V] [VectorSpace F V]
+variable {P : Type} [AffineSpace V P]
+variable {ι : Type}
+variable {W : Type} [AddCommGroup W] [VectorSpace F W]
+variable {R : Type} [AffineSpace W R]
+variable {κ : Type}
 
-namespace CoordinateSystem
-
-def coordinates (cs: CoordinateSystem F V P) (p : P) : cs.ι → F :=
+/-- Returns coordinates of a given point in the given CoordinateSystem. -/
+def CoordinateSystem.coordinates (cs: CoordinateSystem ι F V P) (p : P) : ι → F :=
   cs.basis.repr (p -ᵥ cs.origin)
 
-end CoordinateSystem
 
--- Define a polynomial map in specific coordinate systems
-structure PolynomialMapInCoords (map : P → R) (cs₁ : CoordinateSystem F V P)
-  (cs₂ : CoordinateSystem F W R) where
-  --The polynomials representing the map
-  polys : cs₂.ι → MvPolynomial cs₁.ι F
-  --The coordinates of the mapped point must be values of polys of the coordinates of the initial point
-  map_poly_eq: ∀(p : P)(i : cs₂.ι),
+
+/-- A polynomial map in coordinates is a map, that can be represented
+with polynomials in the given coordinate systems.-/
+structure PolynomialMapInCoords (map : P → R) (cs₁ : CoordinateSystem ι F V P)
+  (cs₂ : CoordinateSystem κ F W R) where
+
+  /-- The polynomials representing the map.-/
+  polys : κ  → MvPolynomial ι F
+
+  /-- The coordinates of a point mapped with `map` must be equal to values
+  of the polynomials in `polys` in the coordinates of the initial point -/
+  map_poly_eq: ∀ (p : P) (i : κ),
    (cs₂.coordinates (map p)) i = (polys i).eval (cs₁.coordinates p)
-  --Degree of polynomial map is the smallest bound for degrees of polys
-  degree : Nat
-  deg_max: ∀(i : cs₂.ι), degree ≥ (polys i).totalDegree
-  deg_exist: ∃(i : cs₂.ι), degree = (polys i).totalDegree
 
-/-The property of being polynomial in given coordinate systems (existence
-of the PolynomialMapInCoords structure for given systems)-/
-def isPolyMapInCoords (map : P → R) (cs₁ : CoordinateSystem F V P)
- (cs₂ : CoordinateSystem F W R) : Prop :=
+def PolynomialMapInCoords.degree [Fintype κ]
+  {map : P → R}
+  {cs₁ : CoordinateSystem ι F V P}
+  {cs₂ : CoordinateSystem κ F W R}
+  (M : PolynomialMapInCoords map cs₁ cs₂) : Nat :=
+    Finset.univ.sup (fun i => (M.polys i).totalDegree)
+
+def isPolyMapInCoords (map : P → R) (cs₁ : CoordinateSystem ι F V P)
+ (cs₂ : CoordinateSystem κ F W R) : Prop :=
   Nonempty (PolynomialMapInCoords map cs₁ cs₂)
 
-theorem poly_in_one_poly_in_another (map : P → R) (cs₁ : CoordinateSystem F V P)
- (cs₂ : CoordinateSystem F W R)(cs₃ : CoordinateSystem F V P)(cs₄ : CoordinateSystem F W R):
+  variable {ι₁ ι₂ κ₁ κ₂ : Type}
+
+theorem poly_in_one_poly_in_another (map : P → R) (cs₁ : CoordinateSystem ι₁ F V P)
+ (cs₂ : CoordinateSystem κ₁ F W R) (cs₃ : CoordinateSystem ι₂ F V P)
+ (cs₄ : CoordinateSystem κ₂ F W R):
    (isPolyMapInCoords map cs₁ cs₂) → (isPolyMapInCoords map cs₃ cs₄) := by
    sorry
 
-theorem poly_in_one_poly_in_all (map : P → R) (cs₁ : CoordinateSystem F V P)
- (cs₂ : CoordinateSystem F W R):
-  (isPolyMapInCoords map cs₁ cs₂) → ∀ (cs₃ : CoordinateSystem F V P)(cs₄ : CoordinateSystem F W R), (isPolyMapInCoords map cs₃ cs₄) := by
+theorem poly_in_one_poly_in_all (map : P → R) (cs₁ : CoordinateSystem ι F V P)
+ (cs₂ : CoordinateSystem κ F W R):
+  (isPolyMapInCoords map cs₁ cs₂) → ∀ (cs₃ : CoordinateSystem ι₂ F V P)
+  (cs₄ : CoordinateSystem κ₂ F W R), (isPolyMapInCoords map cs₃ cs₄) := by
     intro h cs₃ cs₄
     apply (poly_in_one_poly_in_another map cs₁ cs₂)
     exact h
 
-/-Define the property of being a polynomial map (existence of two coordinate
-  systems in which it is polynomial in coordinates)-/
 def isPolyMap (map: P → R) : Prop :=
-  ∃ (cs₁ : CoordinateSystem F V P) (cs₂ : CoordinateSystem F W R),
+  ∃ (cs₁ : CoordinateSystem ι F V P) (cs₂ : CoordinateSystem κ F W R),
     isPolyMapInCoords map cs₁ cs₂
+
+end PolynomialMaps
+
+section Blossom
