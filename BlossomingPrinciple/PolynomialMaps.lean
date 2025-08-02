@@ -1,4 +1,5 @@
 import Mathlib.LinearAlgebra.AffineSpace.Defs
+import Mathlib.LinearAlgebra.AffineSpace.AffineMap
 import Mathlib.LinearAlgebra.Basis.VectorSpace
 import Mathlib.LinearAlgebra.Basis.Defs
 import Mathlib.Algebra.Field.Defs
@@ -75,10 +76,20 @@ theorem poly_in_one_poly_in_all (map : P → R) (cs₁ : CoordinateSystem ι F V
     apply (poly_in_one_poly_in_another map cs₁ cs₂)
     exact h
 
-def isPolyMap (map: P → R) : Prop :=
+def isPolyMap
+  (map: P → R): Prop :=
   ∃ (cs₁ : CoordinateSystem ι F V P) (cs₂ : CoordinateSystem κ F W R),
     isPolyMapInCoords map cs₁ cs₂
 
-end PolynomialMaps
+
+theorem affine_map_is_poly_deg_1
+  (ϕ : AffineMap F P R):
+  isPolyMap ϕ.toFun := by
+  sorry
+
 
 section Blossom
+
+
+
+end Blossom
