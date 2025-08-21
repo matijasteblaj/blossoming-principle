@@ -7,6 +7,7 @@ import Mathlib.Algebra.Field.Defs
 import Mathlib.Algebra.MvPolynomial.Basic
 import Mathlib.Algebra.MvPolynomial.Eval
 import Mathlib.Algebra.MvPolynomial.Degrees
+import Mathlib.Algebra.MvPolynomial.Monad
 
 import Mathlib.Data.Fintype.Defs
 
@@ -92,17 +93,40 @@ lemma poly_change_domain_origin (map : P → R) (new_origin : P)
     rcases h with ⟨M⟩
     constructor
     let γ := cs₁.basis.repr (cs₁.origin -ᵥ new_origin)
-    sorry
-    /-
-    let new_polys (i : κ₁) := M.polys i + MvPolynomial.C (γ i)
+
+    let coordinate_shift : ι₁ → MvPolynomial ι₁ F :=
+      fun i => (MvPolynomial.X i) + (MvPolynomial.C (-γ i))
+
+    have h_shift : ∀ i p, MvPolynomial.eval (cs₃.coordinates p) (coordinate_shift i) = (cs₁.coordinates p) i := by
+      sorry
+
+
+    let new_polys (i : κ₁) := MvPolynomial.bind₁ coordinate_shift (M.polys i)
     use new_polys
     intro p i
-    simp [new_polys]
-    rw [← M.map_poly_eq p i]
+    simp [new_polys, M.map_poly_eq p i]
+    set polyi := M.polys i with h_polyi
+    unfold MvPolynomial.bind₁
+    induction polyi using MvPolynomial.induction_on' with
+      |add r s hr hs => simp[MvPolynomial.eval_add,hr,hs]
+      |monomial mon a => rw[MvPolynomial.aeval_monomial coordinate_shift mon a] ; simp[coordinate_shift];
+
+    --rw [←MvPolynomial.eval_assoc]
+
+    /-
     unfold CoordinateSystem.coordinates at *
-    simp [cs₄, γ]
-    rw [← vsub_add_vsub_cancel (map p) cs₂.origin new_origin, LinearEquiv.map_add]
-    rfl-/
+    simp [cs₃]
+    let coordinate_shift_id : ι₁ → MvPolynomial ι₁ F :=
+      fun i => (MvPolynomial.X i)
+    let coordinate_shift_trans : ι₁ → MvPolynomial ι₁ F :=
+      fun i => (MvPolynomial.C (-γ i))
+    have h_shift: coordinate_shift = coordinate_shift_id + coordinate_shift_trans := by
+      simp [coordinate_shift, coordinate_shift_id, coordinate_shift_trans]
+      apply funext
+      intro j
+      simp
+    rw [MvPolynomial.bind₁, h_shift, MvPolynomial.aeval_eq_eval₂Hom]-/
+
 
 lemma poly_change_codomain_basis (map : P → R)
   (new_basis : Module.Basis κ₂ F W)
